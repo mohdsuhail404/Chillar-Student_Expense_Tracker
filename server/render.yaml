@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: chillar-api
+    env: node
+    region: singapore
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: chillar-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://chillar.vercel.app
